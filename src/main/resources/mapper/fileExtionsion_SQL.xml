@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.test.flow.file.service.impl.FileMapper">
+	
+	<select id="selectFileConfig"  resultType="java.util.HashMap">
+		SELECT 
+			*
+		FROM fileconfig
+	</select>
+	<update id="updateCustomExtensionByIdx" parameterType="java.util.HashMap">
+		UPDATE fileconfig
+		SET customExtension=#{custom}
+		WHERE idx=#{idx}
+	</update>
+	<insert id="insertCustomExtension" parameterType="java.util.HashMap">
+		INSERT INTO 
+		extension(customCode,customExtension) 
+		VALUES(#{customCode},#{custom})
+	</insert>
+	
+	<select id="selectCountOfCustomExtensionByCustomCode" parameterType="java.util.HashMap" resultType="int">
+		SELECT count(*) 
+		FROM extension 
+		where customCode=#{customCode}
+	</select>
+	
+	<select id="selectCustomExtensionList" resultType="java.util.HashMap">
+		SELECT * 
+		FROM extension 
+		where customCode=#{customCode}
+	</select>
+	
+	<delete id="deleteCustomExtension" parameterType="java.util.HashMap">
+		DELETE FROM extension 
+		WHERE idx=#{idx}
+	</delete>
+	
+	<select id="checkCustomExtension" parameterType="java.util.HashMap" resultType="int">
+		SELECT count(*) 
+		FROM extension 
+		where customCode = #{customCode} and customExtension = #{custom}
+	</select>
+	
+	<update id="updateFixExtensionByCustomCode" parameterType="java.util.HashMap">
+		UPDATE fileconfig
+		SET ${fixExtension}=#{useYn}
+		WHERE customCode=#{customCode}
+	</update>
+	
+	<select id="selectFixExtensionFlags" parameterType="java.util.HashMap" resultType="java.util.LinkedHashMap">
+		SELECT 
+			fixExtension1,
+			fixExtension2,
+			fixExtension3,
+			fixExtension4,
+			fixExtension5,
+			fixExtension6,
+		    fixExtension7
+		FROM fileconfig
+		WHERE customCode=#{customCode}
+	</select>
+	
+</mapper>
