@@ -32,7 +32,6 @@ public class FileController {
 	
 	@RequestMapping("/")
 	public String fileMain(HttpServletRequest request, HttpServletResponse response, Model model) throws SQLException {
-		//고정확장자 체크여부
 		int customCount =0;
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("customCode","extension1"); //임시 코드값 부여
@@ -44,8 +43,7 @@ public class FileController {
 	@GetMapping("/api/fix/fixExtensions")
 	@ResponseBody
 	public Map<String,String> selectFixExtensions(HttpServletRequest request, HttpServletResponse response, Model model) throws SQLException {
-		//고정확장자 체크여부
-		int customCount =0;
+
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("customCode","extension1"); //임시 코드값 부여
 		LinkedHashMap<String,String> fixExtensions = fileService.selectFixExtensionFlags(map);
@@ -69,13 +67,8 @@ public class FileController {
 		map.put("customCode","extension1"); //임시 코드값 부여
 		map =fileService.selectFileConfig(); 
 		/*고정 확장자인지 체크*/
-		boolean check = false; //고정확장자 여부 체크
 		String extensions[] = map.get("fixExtensions").toString().split(",");
-		for(String ex: extensions) {
-			 if(ex.equals(extension)){
-			  check=true;
-			 }
-		}
+		boolean check = FixExtensionChecker(extension, extensions);
 		if(check!=true) {
 		 result.put("status", "401");
 		 result.put("msg", "고정확장자값이 아닙니다.");
@@ -155,14 +148,8 @@ public class FileController {
 		map =fileService.selectFileConfig(); 
 			  
 		/*고정 확장자인지 체크*/
-		boolean check = false; //고정확장자 여부 체크
 		String extensions[] = map.get("fixExtensions").toString().split(",");
-		for(String ex: extensions) {
-			 if(ex.equals(extension)){
-			  check=true;
-			 }
-		}
-		
+		boolean check = FixExtensionChecker(extension, extensions);
 		if(check==true) {
 		 result.put("status", "401");
 		 result.put("msg", "고정확장자에서 체크해주세요");
@@ -232,15 +219,9 @@ public class FileController {
 		Map<String,Object> map = new HashMap<String, Object>();
 		map.put("customCode","extension1"); //임시 코드값 부여
 		map =fileService.selectFileConfig(); 
-		//확장자 체크 검사를 수행한다.
-		boolean check = false;
-		//1번 고정확장자인지
 		String extensions[] = map.get("fixExtensions").toString().split(",");
-		for(String ex: extensions) {
-			 if(ex.equals(extension)){
-			  check=true;
-			 }
-		}
+		/*고정확장자인지 체크*/
+		boolean check = FixExtensionChecker(extension,extensions);
 		/*고정값 체크 Y,N값 체크 수행*/
 		if(check) {
 			String column ="";
@@ -279,6 +260,23 @@ public class FileController {
 		}
 		//그외 실제로 파일업로드 로직 수행
 		return "index";
+	}
+	/**
+	 * 고정확장자 리스트를 조회하여 
+	 * 현재 확장자와 고정확장자 리스트에 존재하는 확장자가 맞는지 그 결과값을
+	 * boolean값으로 돌려준다.
+	 * @param extension
+	 * @param extensions
+	 * @return 고정확장자면 true, 아니면 false값을 return한다
+	 */
+	public boolean FixExtensionChecker(String extension,String[] extensions){
+		boolean check = false;
+		for(String ex: extensions) {
+			 if(ex.equals(extension)){
+			  check=true;
+			 }
+		}
+		return check;
 	}
 
 }
