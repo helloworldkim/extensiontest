@@ -195,6 +195,7 @@ public class FileController {
 		if(idx==null || idx.equals("")) {
 			result.put("status", "401");
 			result.put("msg", "삭제중 오류가 발생했습니다.");
+			return result;
 		}
 		
 		int cnt =0;
