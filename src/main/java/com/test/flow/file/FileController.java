@@ -171,6 +171,7 @@ public class FileController {
 		int cnt =0;
 		/*이미 등록된 확장자인지 체크*/
 		payload.put("customCode","extension1"); //임시 코드값 부여
+		payload.put("custom", extension);
 		cnt = fileService.checkCustomExtension(payload);
 		if(cnt!=0) {
 		 result.put("status", "401");

@@ -117,7 +117,7 @@
 			const idx = list[i].idx;
 			htmlTag +='<span style="background-color: white; border: 1px solid black; border-radius: 25px; padding:2px; margin-left:10px">';
 			htmlTag	+= extension;
-			htmlTag	+= '<button type="button" class="btn btn-danger btn-xs" style="background-color: white; border: none; border-radius: 30px; color:red;" onClick="fn_deleteCustom('
+			htmlTag	+= '<button type="button" class="btn btn-danger btn-xs" style="background-color: white; border: none; border-radius: 30px; color:red; margin-bottom:2px;" onClick="fn_deleteCustom('
 			htmlTag += idx;
 			htmlTag += ')">X</button></span>';
 		};

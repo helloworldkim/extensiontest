@@ -40,12 +40,10 @@
 					<tr>
 						<th style="width: 100px;"></th>
 						<td>
-							<div style="border: 1px solid black; border-radius: 15px;">
+							<div style="border: 1px solid black; border-radius: 15px; min-width: 300px; min-height: 300px;">
 								<div style="margin: 3px 3px 0px 3px"><span id="customCount">${customCount}</span>/200</div>
 								<div id="customListDiv" style="margin-top: 5px;">
-									<span style="background-color: white; border: 1px solid black; border-radius: 25px;" >adasdas
-										<button class="btn btn-danger btn-xs" style="background-color: white; border: none; border-radius: 30px; color:red;">X</button>
-									</span>
+									
 								</div>
 							</div>
 						</td>
@@ -62,12 +60,26 @@
 		</form>
 		<div>
 			<h3>True값이면 사용가능한 전송 or 업로드 가능한 파일</h3>
-			<p>
-				${extensionCheck}
+			<p id="extensionResult">
+				
 			</p>
 		</div>
 		
 	</div>
 </div>
+<script>
+	/*제출 결과값 변환부분*/
+	$(function(){
+		let result = ${extensionCheck};
+		if(result==true){
+			result ="성공";
+		}else{
+			result="실패";
+		}
+
+		let target = $("#extensionResult");
+		target.text(result);
+	});
+</script>
 </body>
 </html>

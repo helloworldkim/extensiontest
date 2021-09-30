@@ -9,18 +9,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.test.flow.file.service.FileService;
-import com.test.flow.file.service.FixExtensionVO;
 
 @Service("fileService")
 public class FileServiceImpl implements FileService {
 	
 	@Autowired
 	FileMapper fileMapper;
-
-	@Override
-	public int updateCustomExtensionByIdx(Map<String, Object> payload) throws SQLException {
-		return fileMapper.updateCustomExtensionByIdx(payload);
-	}
 
 	@Override
 	public Map<String, Object> selectFileConfig() throws SQLException {

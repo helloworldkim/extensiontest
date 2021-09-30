@@ -6,12 +6,8 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.test.flow.file.service.FixExtensionVO;
-
 @Mapper
 public interface FileMapper {
-
-	int updateCustomExtensionByIdx(Map<String, Object> payload);
 
 	Map<String, Object> selectFileConfig();
 

@@ -7,8 +7,6 @@ import java.util.Map;
 
 public interface FileService {
 
-	int updateCustomExtensionByIdx(Map<String, Object> payload) throws SQLException;
-
 	Map<String,Object> selectFileConfig() throws SQLException;
 
 	int insertCustomExtension(Map<String, Object> payload) throws SQLException;
