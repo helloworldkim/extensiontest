@@ -23,11 +23,11 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.test.flow.file.service.FileService;
 
-@Controller
 public class FileController {
 	
 	@Autowired
 	FileService fileService;
+	
 	final private static String extensionPattern="^[a-zA-Z]*$"; 
 	
 	@RequestMapping("/")
